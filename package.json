@@ -1,6 +1,6 @@
 {
   "name": "jira2md",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "keywords": [
     "jira",
     "atlassian",
@@ -16,7 +16,7 @@
   "main": "index.js",
   "devDependencies": {
     "chai": "^4.1.2",
-    "mocha": "^8.3.0"
+    "mocha": "^9.2.2"
   },
   "scripts": {
     "test": "mocha --timeout 5000 --check-leaks --reporter spec test/"
@@ -28,6 +28,6 @@
   ],
   "license": "Apache-2.0",
   "dependencies": {
-    "marked": "^2.0.1"
+    "marked": "^4.0.12"
   }
 }
