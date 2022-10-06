@@ -6,10 +6,10 @@ var j2m = require('../index.js');
 
 describe('to_jira', function() {
     it('should exist', function() {
-    	should.exist(j2m.to_jira);
+        should.exist(j2m.to_jira);
     });
     it('should be a function', function() {
-    	j2m.to_jira.should.be.a('function');
+        j2m.to_jira.should.be.a('function');
     });
     it('should convert bolds properly', function() {
         var jira = j2m.to_jira('**bold**');

@@ -1,10 +1,7 @@
-var marked = require('marked');
-marked.setOptions({
-	breaks: true,
-	smartyPants: true
-});
+const { marked } = require('marked');
+marked.setOptions({ breaks: true, smartyPants: true });
 
-var J2M = function() {};
+const J2M = function() {};
 
 J2M.prototype.md_to_html = function(str) {
 	return marked(str);
