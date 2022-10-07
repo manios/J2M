@@ -19,7 +19,7 @@ NOTE: All conversion work bi-directionally (from jira to markdown and back again
 * Italic
 * Bold + Italic
 * Un-ordered lists
-* Ordered lists
+* Ordered lists (with help from [aarbanas](https://github.com/aarbanas))
 * Programming Language-specific code blocks (with help from herbert-venancio)
 * Inline preformatted text spans
 * Un-named links
@@ -63,17 +63,17 @@ h2. H2
 
 ```javascript
 // Include the module
-var j2m = require('jira2md');
+const j2m = require('jira2md');
 
 // If converting from Mardown to Jira Wiki Syntax:
-var jira = j2m.to_jira(md);
+const jira = j2m.to_jira(md);
 
 // If converting from Jira Wiki Syntax to Markdown:
-var md = j2m.to_markdown(jira);
+const md = j2m.to_markdown(jira);
 
 // If converting from Markdown to HTML:
-var html = j2m.md_to_html(md);
+const html = j2m.md_to_html(md);
 
 // If converting from JIRA Wiki Syntax to HTML:
-var html = j2m.jira_to_html(jira);
+const html = j2m.jira_to_html(jira);
 ```
