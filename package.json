@@ -1,6 +1,6 @@
 {
     "name": "jira2md",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "keywords": [
         "jira",
         "atlassian",
@@ -34,7 +34,8 @@
     "contributors": [
         "Kyle Farris <kyle@chomponllc.com>",
         "Eryk Warren <https://github.com/erykwarren>",
-        "Andrej Arbanas <https://github.com/aarbanas>"
+        "Andrej Arbanas <https://github.com/aarbanas>",
+        "Tommi Laukkanen <https://github.com/tlaukkanen>"
     ],
     "license": "Apache-2.0",
     "dependencies": {

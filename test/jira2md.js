@@ -137,6 +137,12 @@ describe('to_markdown', () => {
         const markdown = j2m.to_markdown('A text with{color:blue} blue \n lines {color} is not necessary.');
         markdown.should.eql('A text with blue \n lines  is not necessary.');
     });
+    it('should remove multiple color attributes', () => {
+        const markdown = j2m.to_markdown(
+            'A text with{color:blue} blue \n lines {color} is not necessary. {color:red} red {color}'
+        );
+        markdown.should.eq('A text with blue \n lines  is not necessary.  red ');
+    });
     // it('should not recognize inserts across multiple table cells', () => {
     //      const markdown = j2m.to_markdown('||Heading 1||Heading 2||\n|Col+A1|Col+A2|');
     //      markdown.should.eql('\n|Heading 1|Heading 2|\n| --- | --- |\n|Col+A1|Col+A2|');
