@@ -51,6 +51,10 @@ describe('to_jira', () => {
         const jira = j2m.to_jira("```javascript\nconst hello = 'world';\n```");
         jira.should.eql("{code:javascript}\nconst hello = 'world';\n{code}");
     });
+    it('should convert yaml language-specific code blocks properly', () => {
+        const jira = j2m.to_jira("```yaml\nspring:\n  gcs:\n    bucket: 'bob'\n```");
+        jira.should.eql("{code:yaml}\nspring:  \n  gcs:  \n    bucket: 'bob'  \n{code}");
+    });    
     it('should convert unnamed images properly', () => {
         const jira = j2m.to_jira('![](http://google.com/image)');
         jira.should.eql('!http://google.com/image!');

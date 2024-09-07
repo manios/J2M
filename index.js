@@ -180,10 +180,18 @@ class J2M {
                 // Named/Un-Named Code Block
                 .replace(/```(.+\n)?((?:.|\n)*?)```/g, (match, synt, content) => {
                     let code = '{code}';
+                    let codeBody = content;
                     if (synt) {
                         code = `{code:${synt.replace(/\n/g, '')}}\n`;
+
+                        // Especially for yaml code blocks, we have to
+                        // add two more spaces in every line ending.
+                        // Otherwise Jira shows it distorted.
+                        if(synt === 'yaml\n'){
+                            codeBody = codeBody.replace(/\n/g, '  \n');
+                        }
                     }
-                    return `${code}${content}{code}`;
+                    return `${code}${codeBody}{code}`;
                 })
                 // Inline-Preformatted Text
                 .replace(/`([^`]+)`/g, '{{$1}}')
