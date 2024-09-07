@@ -164,7 +164,7 @@ class J2M {
                         .join('')} `;
                 })
                 // Un-Ordered Lists
-                .replace(/^([ \t]*)\*\s+/gm, (match, spaces) => {
+                .replace(/^([ \t]*)[\*-]\s+/gm, (match, spaces) => {
                     return `${Array(Math.floor(spaces.length / 2 + 1))
                         .fill('*')
                         .join('')} `;
