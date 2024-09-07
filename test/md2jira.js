@@ -123,4 +123,9 @@ describe('to_jira', () => {
         const jira = j2m.to_jira(mdStr);
         jira.should.eql(jiraStr);
     });
+    it('should handle tables', () => {
+        const jira = j2m.to_jira('|id|name|age|\n|-|-|-|\n|1|bob|12|\n|2|patrick|11|\n|3|crab|52|');
+        jira.should.eql('||id||name||age||\n|1|bob|12|\n|2|patrick|11|\n|3|crab|52|');
+    });    
+    
 });
