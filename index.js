@@ -164,7 +164,7 @@ class J2M {
                         .join('')} `;
                 })
                 // Un-Ordered Lists
-                .replace(/^([ \t]*)[\*-]\s+/gm, (match, spaces) => {
+                .replace(/^([ \t]*)[*-]\s+/gm, (match, spaces) => {
                     return `${Array(Math.floor(spaces.length / 2 + 1))
                         .fill('*')
                         .join('')} `;
@@ -187,7 +187,7 @@ class J2M {
                         // Especially for yaml code blocks, we have to
                         // add two more spaces in every line ending.
                         // Otherwise Jira shows it distorted.
-                        if(synt === 'yaml\n'){
+                        if (synt === 'yaml\n') {
                             codeBody = codeBody.replace(/\n/g, '  \n');
                         }
                     }
