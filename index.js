@@ -81,11 +81,11 @@ class J2M {
                 // Remove color: unsupported in md
                 .replace(/\{color:[^}]+\}([^]*?)\{color\}/gm, '$1')
                 // panel into table
-                .replace(/\{panel:title=([^}]*)\}\n?([^]*?)\n?\{panel\}/gm, '\n| $1 |\n| --- |\n| $2 |')
+                .replace(/\{panel:title=([^}]*)\}\n?([^]*?)\n?\{panel\}/gm, '| $1 |\n| --- |\n| $2 |')
                 // table header
                 .replace(/^[ \t]*((?:\|\|.*?)+\|\|)[ \t]*$/gm, (match, headers) => {
                     const singleBarred = headers.replace(/\|\|/g, '|');
-                    return `\n${singleBarred}\n${singleBarred.replace(/\|[^|]+/g, '| --- ')}`;
+                    return `${singleBarred}\n${singleBarred.replace(/\|[^|]+/g, '| --- ')}`;
                 })
                 // remove leading-space of table headers and rows
                 .replace(/^[ \t]*\|/gm, '|')
@@ -120,7 +120,7 @@ class J2M {
             str
                 // Tables
                 .replace(
-                    /^\n((?:\|.*?)+\|)[ \t]*\n((?:\|\s*?-{3,}\s*?)+\|)[ \t]*\n((?:(?:\|.*?)+\|[ \t]*\n)*)$/gm,
+                    /^((?:\|.*?)+\|)[ \t]*\n((?:\|[ \t]*?-+[ \t]*?)+\|)[ \t]*\n((?:(?:\|.*?)+\|[ \t]*\n)*)$/gm,
                     (match, headerLine, separatorLine, rowstr) => {
                         const headers = headerLine.match(/[^|]+(?=\|)/g);
                         const separators = separatorLine.match(/[^|]+(?=\|)/g);

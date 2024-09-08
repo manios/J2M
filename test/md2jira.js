@@ -54,7 +54,7 @@ describe('to_jira', () => {
     it('should convert yaml language-specific code blocks properly', () => {
         const jira = j2m.to_jira("```yaml\nspring:\n  gcs:\n    bucket: 'bob'\n```");
         jira.should.eql("{code:yaml}\nspring:  \n  gcs:  \n    bucket: 'bob'  \n{code}");
-    });    
+    });
     it('should convert unnamed images properly', () => {
         const jira = j2m.to_jira('![](http://google.com/image)');
         jira.should.eql('!http://google.com/image!');
@@ -131,9 +131,9 @@ describe('to_jira', () => {
         const jira = j2m.to_jira(mdStr);
         jira.should.eql(jiraStr);
     });
-    // it('should handle tables', () => {
-    //     const jira = j2m.to_jira('|id|name|age|\n|-|-|-|\n|1|bob|12|\n|2|patrick|11|\n|3|crab|52|');
-    //     jira.should.eql('||id||name||age||\n|1|bob|12|\n|2|patrick|11|\n|3|crab|52|');
-    // });
-    
+    it('should handle tables', () => {
+        const jira = j2m.to_jira('|id|name|age|\n|-|-|-|\n|1|bob|12|\n|2|patrick|11|\n|3|crab|52|\n');
+        jira.should.eql('||id||name||age||\n|1|bob|12|\n|2|patrick|11|\n|3|crab|52|\n');
+    });
+
 });
