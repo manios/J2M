@@ -81,11 +81,11 @@ class J2M {
                 // Remove color: unsupported in md
                 .replace(/\{color:[^}]+\}([^]*?)\{color\}/gm, '$1')
                 // panel into table
-                .replace(/\{panel:title=([^}]*)\}\n?([^]*?)\n?\{panel\}/gm, '\n| $1 |\n| --- |\n| $2 |')
+                .replace(/\{panel:title=([^}]*)\}\n?([^]*?)\n?\{panel\}/gm, '| $1 |\n| --- |\n| $2 |')
                 // table header
                 .replace(/^[ \t]*((?:\|\|.*?)+\|\|)[ \t]*$/gm, (match, headers) => {
                     const singleBarred = headers.replace(/\|\|/g, '|');
-                    return `\n${singleBarred}\n${singleBarred.replace(/\|[^|]+/g, '| --- ')}`;
+                    return `${singleBarred}\n${singleBarred.replace(/\|[^|]+/g, '| --- ')}`;
                 })
                 // remove leading-space of table headers and rows
                 .replace(/^[ \t]*\|/gm, '|')
@@ -120,7 +120,7 @@ class J2M {
             str
                 // Tables
                 .replace(
-                    /^\n((?:\|.*?)+\|)[ \t]*\n((?:\|\s*?-{3,}\s*?)+\|)[ \t]*\n((?:(?:\|.*?)+\|[ \t]*\n)*)$/gm,
+                    /^((?:\|.*?)+\|)[ \t]*\n((?:\|[ \t]*?-+[ \t]*?)+\|)[ \t]*\n((?:(?:\|.*?)+\|[ \t]*\n?)*)$/gm,
                     (match, headerLine, separatorLine, rowstr) => {
                         const headers = headerLine.match(/[^|]+(?=\|)/g);
                         const separators = separatorLine.match(/[^|]+(?=\|)/g);
@@ -164,7 +164,7 @@ class J2M {
                         .join('')} `;
                 })
                 // Un-Ordered Lists
-                .replace(/^([ \t]*)\*\s+/gm, (match, spaces) => {
+                .replace(/^([ \t]*)[*-]\s+/gm, (match, spaces) => {
                     return `${Array(Math.floor(spaces.length / 2 + 1))
                         .fill('*')
                         .join('')} `;
@@ -180,10 +180,18 @@ class J2M {
                 // Named/Un-Named Code Block
                 .replace(/```(.+\n)?((?:.|\n)*?)```/g, (match, synt, content) => {
                     let code = '{code}';
+                    let codeBody = content;
                     if (synt) {
                         code = `{code:${synt.replace(/\n/g, '')}}\n`;
+
+                        // Especially for yaml code blocks, we have to
+                        // add two more spaces in every line ending.
+                        // Otherwise Jira shows it distorted.
+                        if (synt === 'yaml\n') {
+                            codeBody = codeBody.replace(/\n/g, '  \n');
+                        }
                     }
-                    return `${code}${content}{code}`;
+                    return `${code}${codeBody}{code}`;
                 })
                 // Inline-Preformatted Text
                 .replace(/`([^`]+)`/g, '{{$1}}')
