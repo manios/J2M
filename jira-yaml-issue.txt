@@ -1,0 +1,32 @@
+https://community.atlassian.com/t5/Jira-questions/Jira-yaml-code-snippet-display-issue/qaq-p/2088554
+
+Normal Kubernetes yaml :
+
+{code:yaml}
+kind: Installation
+apiVersion: operator.tigera.io/v1
+metadata:
+  name: default
+spec:
+  calicoNetwork:
+    bgp: Disabled
+    ipPools:
+     - cidr: 192.168.0.0/16
+       encapsulation: VXLAN
+{code}
+
+Kubernetes yaml with 2 space characters before newline renders correctly:
+
+{code:yaml}
+kind: Installation  
+apiVersion: operator.tigera.io/v1  
+metadata:  
+  name: default  
+spec:  
+  calicoNetwork:  
+    bgp: Disabled  
+    ipPools:  
+     - cidr: 192.168.0.0/16  
+       encapsulation: VXLAN  
+{code}
+
